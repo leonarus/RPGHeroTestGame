@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-/// <summary>
-/// Класс, отвечающий за хранение количества выигранных призов
-/// </summary>
+
+
 public class CollectedPrizesController : MonoBehaviour
 {
     public Action<PrizeType, int> PrizeCountChanged;
@@ -12,7 +11,7 @@ public class CollectedPrizesController : MonoBehaviour
     public int Gems => _prizes[PrizeType.Gem];
 
     // Словарь, хранящий количество выигранного приза по ключу - Тип приза
-    private Dictionary<PrizeType, int> _prizes = new()
+    private readonly Dictionary<PrizeType, int> _prizes = new()
     {
         { PrizeType.Coin, 0 },
         { PrizeType.Gem, 0 },

@@ -2,9 +2,8 @@ using System;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
-/// <summary>
-/// Класс, отвечающий за хранение и изменение количества попыток спинов
-/// </summary>
+
+
 public class AttemptsController : MonoBehaviour
 {
     public Action<int> AttemptsCountChanged;

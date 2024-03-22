@@ -1,13 +1,11 @@
 using Currency;
-using JetBrains.Annotations;
+using Managers;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-/// <summary>
-/// Менеджер игры, подписывающий на события игровые сущности
-/// </summary>
+
 public class LuckySpinScreenManager : MonoBehaviour
 {
+    [SerializeField] private AudioManager _audioManager;
     [SerializeField] 
     private AttemptsController _attemptsController;
     [SerializeField] 
@@ -57,7 +55,6 @@ public class LuckySpinScreenManager : MonoBehaviour
     private void OnAttemptsChanged(int attempts)
     {
         _attemptsView.UpdateAttempts(attempts);
-        _attemptsView.PlayTicketAnimation();
     }
     
     private void OnPrizesCollected()

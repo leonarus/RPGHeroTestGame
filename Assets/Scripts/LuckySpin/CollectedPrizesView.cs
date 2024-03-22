@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-/// <summary>
-/// Класс, отвечающий за отображение количества выигранных призов на экране
-/// </summary>
+
+
 public class CollectedPrizesView : MonoBehaviour
 {
     [SerializeField] 

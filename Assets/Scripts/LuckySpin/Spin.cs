@@ -1,14 +1,20 @@
 using System.Collections;
+using Managers;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
-/// <summary>
-/// Класс, отвечающий за вращение рулетки
-/// </summary>
+
+
 public class Spin : MonoBehaviour
 {
     public UnityEvent RotationStopped;
 
+    [SerializeField] private AttemptsView _attemptsView;
+    [SerializeField] private AudioManager _audioManager;
+    [SerializeField] private float animationDuration = 1f;
+    
+    [SerializeField] private AudioSource _spinSound;
+    [SerializeField] private float _minPitch = 0.35f;
     private float _rotationTime = 2f; // Общее время вращения в секундах
     private float _minSpeed = 700f; // Минимальная скорость вращения
     private float _maxSpeed = 900f; // Максимальная скорость вращения
@@ -19,14 +25,23 @@ public class Spin : MonoBehaviour
     public void Rotate()
     {
         StopAllCoroutines();
-        StartRotation();
+        StartCoroutine(WaitAndRotate());
     }
 
     private void StartRotation()
     {
         InitializeRotation();
-        // Начинаем вращение
         StartCoroutine(RotateForTime());
+        _spinSound.Play();
+    }
+    
+    private IEnumerator WaitAndRotate()
+    {
+        _attemptsView.PlayTicketAnimation(); 
+        _audioManager.PlayInsertTicketSound();
+        yield return new WaitForSeconds(animationDuration); 
+        
+        StartRotation();
     }
 
     private void InitializeRotation()
@@ -45,11 +60,21 @@ public class Spin : MonoBehaviour
         {
             transform.Rotate(Vector3.back, _currentSpeed * Time.deltaTime);
             _currentSpeed = Mathf.Lerp(maxSpeed, 0,  elapsedTime / _currentRotationTime);
-            
+            SetSoundPitch();
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         
         RotationStopped.Invoke();
+        _spinSound.Stop();
+    }
+    
+    private void SetSoundPitch()
+    {
+        // Преобразуем скорость вращения колеса в высоту тона звука
+        var pitch = Mathf.Max(_currentSpeed / _maxSpeed, _minPitch);
+        // Применяем вычисленную высоту тона к источнику звука
+        _spinSound.pitch = pitch;
     }
 }

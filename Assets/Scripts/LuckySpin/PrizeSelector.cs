@@ -1,11 +1,11 @@
 using JetBrains.Annotations;
+using Managers;
 using UnityEngine;
 
-/// <summary>
-/// Класс стрелки рулетки, подбирающей выпавший приз
-/// </summary>
+
 public class PrizeSelector : MonoBehaviour
 {
+    [SerializeField] private AudioManager _audioManager;
     private PolygonCollider2D _selectorCollider;
 
     private void Awake()
@@ -17,22 +17,21 @@ public class PrizeSelector : MonoBehaviour
     [UsedImplicitly]
     public void SelectPrize()
     {
+        _audioManager.PlayLuckySpinRewardCardSound();
         // Создаем массив для хранения результатов рейкаста.
         var hits = new RaycastHit2D[10];
         // Стреляем лучом из стрелки
         var hitCount = _selectorCollider.Raycast(transform.position, hits);
         
         // Если столкновения были
-        if (hitCount > 0)
-        {
-            // Получаем ближайший объект
-            var hit = hits[0];
+        if (hitCount <= 0) return;
+        // Получаем ближайший объект
+        var hit = hits[0];
 
-            if (hit.collider.gameObject.TryGetComponent(out Item prize))
-            {
-                // Берем приз
-                prize.Pick();
-            }
+        if (hit.collider.gameObject.TryGetComponent(out Item prize))
+        {
+            // Берем приз
+            prize.Pick();
         }
     }
 }

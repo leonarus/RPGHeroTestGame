@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-/// <summary>
-/// Класс, отвечающий за элемент-приз
-/// </summary>
+
+
 public class Item : MonoBehaviour
 {
     public Action<PrizeType, int> ItemCollected;
