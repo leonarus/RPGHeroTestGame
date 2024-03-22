@@ -27,7 +27,10 @@ namespace Currency
                 StopCoroutine(_scoreCoroutine);
             }
 
-            _scoreCoroutine = StartCoroutine(UpdateScore(currentScore, newScore));
+            if (gameObject.activeInHierarchy)
+            {
+                _scoreCoroutine = StartCoroutine(UpdateScore(currentScore, newScore));
+            }
         }
 
         private IEnumerator UpdateScore(int currentScore, int targetScore)
