@@ -54,15 +54,10 @@ public class LuckySpinScreenManager : MonoBehaviour
         _lootChest.PrizesCollected += OnPrizesCollected;
     }
     
-    [UsedImplicitly]
-    public void OpenLobbyScreen()
-    {
-        SceneManager.LoadScene(GlobalConstants.LOBBY_SCENE);
-    }
-    
     private void OnAttemptsChanged(int attempts)
     {
         _attemptsView.UpdateAttempts(attempts);
+        _attemptsView.PlayTicketAnimation();
     }
     
     private void OnPrizesCollected()

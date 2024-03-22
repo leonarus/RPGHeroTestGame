@@ -46,6 +46,6 @@ public class LootChest : MonoBehaviour
     [UsedImplicitly]
     public void ToggleMovement(bool canMove)
     {
-        //_canMove = canMove;
+        _canMove = canMove;
     }
 }
