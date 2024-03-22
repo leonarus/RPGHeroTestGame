@@ -25,16 +25,16 @@ public class LuckySpinScreenManager : MonoBehaviour
     
     private void SubscribeToEvents()
     {
-        _attemptsController.AttemptsCountChanged += OnAttemptsChanged;
-        foreach (var prize in _prizes)
-        {
-            if (prize != null)
-                prize.ItemCollected += _collectedPrizesController.SetPrizeCount;
-        }
-        _collectedPrizesController.PrizeCountChanged += _collectedPrizesView.UpdatePrizesView;
-        _coinsManager.ScoreChangedEvent += _coinsView.UpdateViewGradually;
-        _gemsManager.ScoreChangedEvent += _gemsView.UpdateViewGradually;
-        _lootChest.PrizesCollected += OnPrizesCollected;
+       _attemptsController.AttemptsCountChanged += OnAttemptsChanged;
+       foreach (var prize in _prizes)
+       {
+           if (prize != null)
+               prize.ItemCollected += _collectedPrizesController.SetPrizeCount;
+       }
+       _collectedPrizesController.PrizeCountChanged += _collectedPrizesView.UpdatePrizesView;
+       _coinsManager.ScoreChangedEvent += _coinsView.UpdateViewGradually;
+       _gemsManager.ScoreChangedEvent += _gemsView.UpdateViewGradually;
+       _lootChest.PrizesCollected += OnPrizesCollected;
     }
 
     private void InitializeCurrency()

@@ -11,7 +11,7 @@ public class CollectedPrizesController : MonoBehaviour
     public int Gems => _prizes[PrizeType.Gem];
 
     // Словарь, хранящий количество выигранного приза по ключу - Тип приза
-    private readonly Dictionary<PrizeType, int> _prizes = new()
+    private  Dictionary<PrizeType, int> _prizes = new()
     {
         { PrizeType.Coin, 0 },
         { PrizeType.Gem, 0 },
